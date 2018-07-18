@@ -1,0 +1,30 @@
+@import "../assets/sass/_colors";
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* main container */
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.main {
+  flex: 1;
+  order: 2;
+  padding: 20px;
+  background-color: $DEFAULT_BG;
+}
+
+/* sidebar */
+
+.sidebar {
+  order: 1;
+  width: 15%;
+  background: $DEFAULT_COLOR;
+  padding: 20px;
+}
