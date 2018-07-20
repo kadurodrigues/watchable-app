@@ -1,0 +1,44 @@
+.category-title {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-top: 20px;
+
+  &__movie {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__movie-cover {
+    height: 165px;
+    border-radius: 2px;
+    background-color: #777;
+  }
+
+  &__movie-title {
+    white-space: nowrap;
+    flex: 1;                  
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 0;
+    margin-top: 5px;
+    font-size: .8rem;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  &__movie-year {
+    margin-top: 3px;
+    font-size: .7rem;
+    font-weight: 400;
+    color: rgba(255,255,255,.4);
+  }
+}

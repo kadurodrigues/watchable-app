@@ -1,0 +1,85 @@
+{
+  "popular": {
+    "title": "Popular",
+    "movies": [
+      { 
+        "title": "Suicide Squad",
+        "year": "2016" 
+      },
+      { 
+        "title": "Jason Bourne",
+        "year": "2016" 
+      },
+      { 
+        "title": "Now You See Me 2",
+        "year": "2016" 
+      },
+      { 
+        "title": "The Boy Next Door",
+        "year": "2015" 
+      },
+      { 
+        "title": "The Jungle Book",
+        "year": "2016" 
+      },
+      { 
+        "title": "Mechanic: Resurrection",
+        "year": "2016" 
+      },
+      { 
+        "title": "Batman v Superman: Dawn of Justice",
+        "year": "2016" 
+      },
+      { 
+        "title": "Mad Max: Fury Road",
+        "year": "2015" 
+      },
+      { 
+        "title": "Captain America: Civil War",
+        "year": "2015" 
+      },
+      { 
+        "title": "Jurassic World",
+        "year": "2015" 
+      },
+      { 
+        "title": "The Hunger Games: Mockingjay - Part 1",
+        "year": "2014" 
+      }
+    ]
+  },
+  "topRated": {
+    "title": "Top Rated",
+    "movies": [
+      { 
+        "title": "The Shawshank Redemption",
+        "year": "1994" 
+      },
+      { 
+        "title": "Whiplash",
+        "year": "2014" 
+      },
+      { 
+        "title": "The Godfather",
+        "year": "1972" 
+      }
+    ]
+  },
+  "upcoming": {
+    "title": "Up Coming",
+    "movies": [
+      { 
+        "title": "The Light Between Oceans",
+        "year": "2018" 
+      },
+      { 
+        "title": "Keanu",
+        "year": "2018" 
+      },
+      { 
+        "title": "Juste la fin du monder",
+        "year": "2018" 
+      }
+    ]
+  }
+}
