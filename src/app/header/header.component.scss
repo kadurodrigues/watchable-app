@@ -1,7 +1,12 @@
 @import "../../assets/sass/_colors";
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
+.header {
+  display: flex;
+  
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+  }
 }
+

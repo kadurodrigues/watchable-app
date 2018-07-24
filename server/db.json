@@ -3,63 +3,77 @@
     "title": "Popular",
     "movies": [
       { 
+        "id": "01",
         "title": "Suicide Squad",
         "year": "2016" 
       },
       { 
+        "id": "02",
         "title": "Jason Bourne",
         "year": "2016" 
       },
       { 
+        "id": "03",
         "title": "Now You See Me 2",
         "year": "2016" 
       },
       { 
+        "id": "04",
         "title": "The Boy Next Door",
         "year": "2015" 
       },
       { 
+        "id": "05",
         "title": "The Jungle Book",
         "year": "2016" 
       },
       { 
+        "id": "06",
         "title": "Mechanic: Resurrection",
         "year": "2016" 
       },
       { 
+        "id": "07",
         "title": "Batman v Superman: Dawn of Justice",
         "year": "2016" 
       },
       { 
+        "id": "08",
         "title": "Mad Max: Fury Road",
         "year": "2015" 
       },
       { 
+        "id": "09",
         "title": "Captain America: Civil War",
         "year": "2015" 
       },
       { 
+        "id": "10",
         "title": "Jurassic World",
         "year": "2015" 
       },
       { 
+        "id": "11",
         "title": "The Hunger Games: Mockingjay - Part 1",
         "year": "2014" 
       }
     ]
   },
-  "topRated": {
+  "top-rated": {
     "title": "Top Rated",
     "movies": [
       { 
+        "id": "12",
         "title": "The Shawshank Redemption",
         "year": "1994" 
       },
       { 
+        "id": "13",
         "title": "Whiplash",
         "year": "2014" 
       },
       { 
+        "id": "14",
         "title": "The Godfather",
         "year": "1972" 
       }
@@ -69,17 +83,36 @@
     "title": "Up Coming",
     "movies": [
       { 
+        "id": "15",
         "title": "The Light Between Oceans",
         "year": "2018" 
       },
       { 
+        "id": "16",
         "title": "Keanu",
         "year": "2018" 
       },
       { 
+        "id": "17",
         "title": "Juste la fin du monder",
         "year": "2018" 
       }
     ]
-  }
+  },
+  "movies": [
+    {
+      "id": "01",
+      "title": "Avengers: Infinit War",
+      "year": "2018",
+      "vote_average": 5.91,
+      "overview": "The most dangerous former operative of the CIA is drawn out of hiding to uncover hidden truths about his past."
+    },
+    {
+      "id": "02",
+      "title": "Deadpool 2",
+      "year": "2018",
+      "vote_average": 6.59,
+      "overview": "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol."
+    }
+  ]
 }

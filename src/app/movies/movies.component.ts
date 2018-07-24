@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { MoviesService } from './movies.service';
 
-import { CATEGORIES } from '../../assets/constants';
+import { LOCAL_STORAGE_KEYS } from '../../assets/constants';
 
 @Component({
   selector: 'wb-movies',
@@ -10,44 +11,35 @@ import { CATEGORIES } from '../../assets/constants';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-  public categoryTitle: string;
   public movies: Array<any>;
+  public category: string;
 
   constructor(
-    private activateRoute: ActivatedRoute, 
+    private activateRoute: ActivatedRoute,
+    private router: Router, 
     private moviesService: MoviesService
   ) { }
 
   ngOnInit() {
+    localStorage.setItem(LOCAL_STORAGE_KEYS.isLoggedIn, JSON.stringify(false));
+
     this.activateRoute.params.subscribe(params => {
-      if (params.category === CATEGORIES.popular) {
-        this.getPopularMovies();
-      } else if (params.category === CATEGORIES.topRated) {
-        this.getTopRatedMovies();
-      } else {
-        this.getUpcomingMovies();
-      }
+      this.category = params.category;
+      this.getMovies(params.category);
     });
   }
 
-  public getPopularMovies() {
-    this.moviesService.getPopularMovies().subscribe(category => {
-      this.categoryTitle = category.title;
+  public getMovies(category: string) {
+    this.moviesService.getMovies(category).subscribe(category => {
       this.movies = category.movies;
     })
   }
 
-  public getTopRatedMovies() {
-    this.moviesService.getTopRatedMovies().subscribe(category => {
-      this.categoryTitle = category.title;
-      this.movies = category.movies;
-    })
+  public goToMoviePage(movie: any) {
+    this.router.navigate([`/movies/${this.category}/`, this.setStringPath(movie.title)], { queryParams: { id: movie.id } });
   }
 
-  public getUpcomingMovies() {
-    this.moviesService.getUpcomingMovies().subscribe(category => {
-      this.categoryTitle = category.title;
-      this.movies = category.movies;
-    })
+  public setStringPath(path: string) {
+    return path.replace(/[: ]+/g, '-').toLowerCase();
   }
 }

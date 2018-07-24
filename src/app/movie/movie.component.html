@@ -1,0 +1,7 @@
+<wb-breadcrumb [category]="categoryBreadcrumb" [title]="titleBreadcrumb" (previousPage)="goBack($event)"></wb-breadcrumb>
+
+<div class="movie">
+  <h2 class="movie__title">{{ title }}</h2>
+  <p class="movie__overview">{{ overview }}</p>
+  <button mat-raised-button (click)="addMovie()">Add Movie</button>
+</div>

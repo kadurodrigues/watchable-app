@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  popularURL: 'http://localhost:3000/popular',
-  topRatedURL: 'http://localhost:3000/topRated',
-  upComingURL: 'http://localhost:3000/upcoming'
+  API_URL: 'http://localhost:3000',
 };
 
 /*

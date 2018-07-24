@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LIST_MOVIES_USER } from '../../assets/constants';
 
 @Component({
   selector: 'wb-header',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  public lists: Array<any>;
 
-  constructor() { }
+  constructor(private router: Router, ) { }
 
   ngOnInit() {
+    this.lists = LIST_MOVIES_USER.map(list => list);
   }
 
+  public goToListPage(list: any) {
+    this.router.navigate([`/my-lists/`, this.setStringPath(list.title)]);
+  }
+
+  public setStringPath(path: string) {
+    return path.replace(/[: ]+/g, '-').toLowerCase();
+  }
 }

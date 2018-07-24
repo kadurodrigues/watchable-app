@@ -1,1 +1,9 @@
-<h2 class="logo">Watchable</h2>
+<header class="header">
+  <h2 class="header__logo">Watchable</h2>
+  <button class="user-list-button" mat-button [matMenuTriggerFor]="menu">My Lists</button>
+  <mat-menu #menu="matMenu">
+    <div *ngFor="let list of lists">
+      <button mat-menu-item (click)="goToListPage(list)">{{list.title}}</button>
+    </div>
+  </mat-menu>
+</header>
