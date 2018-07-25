@@ -10,8 +10,22 @@ export class MoviesService {
 
   constructor(private http: HttpClient) { }
 
-  public getMovies(genre: string): Observable<any> {
-    return this.http.get(`${environment.API_URL}/${genre}`);
+  public getConfigImagePath(): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/configuration?api_key=${environment.apiKey}`
+    );
+  }
+
+  public getHighlightsListMovies(list: string): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/movie/${list}?api_key=${environment.apiKey}&language=en-US&page=1`
+    );
+  }
+  
+  public getGenreMovies(genreId: string): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/genre/${genreId}/movies?api_key=${environment.apiKey}&language=en-US&page=1`
+    );
   }
 
   public getMovie(id: string): Observable<any> {

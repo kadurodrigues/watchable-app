@@ -3,7 +3,11 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 import { MoviesService } from '../shared/sevices/movies.service';
 
-import { LOCAL_STORAGE_KEYS, SIDENAV_HIGHLIGHTED_LISTS } from '../../assets/constants';
+import { 
+  LOCAL_STORAGE_KEYS, 
+  SIDENAV_HIGHLIGHTED_LISTS, 
+  SIDENAV_GENRES_LIST 
+} from '../../assets/constants';
 
 @Component({
   selector: 'wb-movies',
@@ -14,6 +18,8 @@ export class MoviesComponent implements OnInit {
   public movies: Array<any>;
   public genreTitle: string;
   public genrePath: string;
+
+  public postPath = localStorage.getItem('posterBasePath');
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -26,15 +32,31 @@ export class MoviesComponent implements OnInit {
 
     this.activateRoute.params.subscribe(params => {
       this.genrePath = params.genre;
-      this.genreTitle = SIDENAV_HIGHLIGHTED_LISTS.find(item => item.path === params.genre).name;
-      this.getMovies(params.genre);
+      this.genreTitle = this.setListName(params.genre);
+      this.isGenreType(params.genre) ? this.getGenreMovies(params.genre) : this.getHighlightsListMovies(params.genre);
     });
   }
 
+  public setListName(path: string) {
+    return [...SIDENAV_HIGHLIGHTED_LISTS, ...SIDENAV_GENRES_LIST].find(item => item.path === path).name;
+  }
 
-  public getMovies(genre: string) {
-    this.moviesService.getMovies(genre).subscribe(list => {
-      this.movies = list.movies;
+  public isGenreType(genre: string) {
+    return [...SIDENAV_HIGHLIGHTED_LISTS, ...SIDENAV_GENRES_LIST]
+      .filter(item => item.path === genre)
+      .some(item => item.hasOwnProperty('id'))
+  }
+
+  public getGenreMovies(genre: string) {
+    const genreId = SIDENAV_GENRES_LIST.find(item => item.path === genre).id;
+    this.moviesService.getGenreMovies(genreId).subscribe(list => {
+      this.movies = list.results;
+    });
+  }
+
+  public getHighlightsListMovies(list: string) {
+    this.moviesService.getHighlightsListMovies(list).subscribe(list => {
+      this.movies = list.results;
     });
   }
 
