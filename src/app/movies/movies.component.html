@@ -1,15 +1,12 @@
-<h2 class="category-title">
-  {{ category }}
+<h2 class="genre-title">
+  {{ genreTitle }}
 </h2>
 
 <ul class="movies-list" *ngIf="movies?.length !== 0">
   <li class="movies-list__movie" *ngFor="let movie of movies">
-    <div 
-      (click)="goToMoviePage(movie)"
-      class="movies-list__movie-cover" 
-      style="background-image: url(../../assets/images/movie-cover.jpg)">
+    <div (click)="goToMoviePage(movie)" class="movies-list__movie-cover">
     </div>
     <h3 class="movies-list__movie-title">{{ movie.title }}</h3>
     <p class="movies-list__movie-year">{{ movie.year }}</p>
-  </li> 
+  </li>
 </ul>

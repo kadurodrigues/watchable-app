@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
-import { MoviesService } from './movies.service';
+import { MoviesService } from '../shared/sevices/movies.service';
 
-import { LOCAL_STORAGE_KEYS } from '../../assets/constants';
+import { LOCAL_STORAGE_KEYS, SIDENAV_HIGHLIGHTED_LISTS } from '../../assets/constants';
 
 @Component({
   selector: 'wb-movies',
@@ -12,11 +12,12 @@ import { LOCAL_STORAGE_KEYS } from '../../assets/constants';
 })
 export class MoviesComponent implements OnInit {
   public movies: Array<any>;
-  public category: string;
+  public genreTitle: string;
+  public genrePath: string;
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
     private moviesService: MoviesService
   ) { }
 
@@ -24,19 +25,21 @@ export class MoviesComponent implements OnInit {
     localStorage.setItem(LOCAL_STORAGE_KEYS.isLoggedIn, JSON.stringify(false));
 
     this.activateRoute.params.subscribe(params => {
-      this.category = params.category;
-      this.getMovies(params.category);
+      this.genrePath = params.genre;
+      this.genreTitle = SIDENAV_HIGHLIGHTED_LISTS.find(item => item.path === params.genre).name;
+      this.getMovies(params.genre);
     });
   }
 
-  public getMovies(category: string) {
-    this.moviesService.getMovies(category).subscribe(category => {
-      this.movies = category.movies;
-    })
+
+  public getMovies(genre: string) {
+    this.moviesService.getMovies(genre).subscribe(list => {
+      this.movies = list.movies;
+    });
   }
 
   public goToMoviePage(movie: any) {
-    this.router.navigate([`/movies/${this.category}/`, this.setStringPath(movie.title)], { queryParams: { id: movie.id } });
+    this.router.navigate([`movies/${this.genrePath}/`, this.setStringPath(movie.title)], { queryParams: { id: movie.id } });
   }
 
   public setStringPath(path: string) {

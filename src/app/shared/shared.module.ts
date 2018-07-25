@@ -1,8 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { 
-  MatToolbarModule, 
+import {
+  MatToolbarModule,
   MatSidenavModule,
   MatDialogModule,
   MatMenuModule,
@@ -14,6 +14,8 @@ import {
 
 import { MatIconModule } from '@angular/material/icon';
 import { DialogComponent } from './components/dialog/dialog.component';
+
+import { MoviesService } from './sevices/movies.service';
 
 @NgModule({
   imports: [
@@ -44,11 +46,11 @@ import { DialogComponent } from './components/dialog/dialog.component';
   ],
   entryComponents: [DialogComponent]
 })
-export class SharedModule { 
+export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: []
+      providers: [MoviesService]
     };
   }
 }

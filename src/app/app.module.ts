@@ -5,8 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app.routing.modules';
 
-import { MoviesService } from './movies/movies.service';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -14,6 +12,8 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieComponent } from './movie/movie.component';
 import { MoviesUserComponent } from './movies-user/movies-user.component';
 import { BreadcrumbComponent } from './movie/breadcrumb/breadcrumb.component';
+
+import { SidenavService } from './sidenav/sidenav.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { BreadcrumbComponent } from './movie/breadcrumb/breadcrumb.component';
     AppRoutingModule,
   ],
   schemas: [NO_ERRORS_SCHEMA],
-  providers: [MoviesService],
+  providers: [SidenavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

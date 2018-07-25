@@ -1,5 +1,11 @@
 <ul class="sidenav__list">
-  <li *ngFor="let item of items">
-    <a class="sidenav__list-item" [routerLink]="['/movies', item.link]"  routerLinkActive="sidenav__list-item--active">{{item.title}}</a>
+  <li class="sidenav__list-item" *ngFor="let list of highlightedLists">
+    <a class="sidenav__list-item__link" [routerLink]="['/movies', list.path]" routerLinkActive="sidenav__list-item__link--active">{{list.name}}</a>
+  </li>
+</ul>
+
+<ul class="sidenav__list" *ngIf="genresList?.length !== 0">
+  <li class="sidenav__list-item" *ngFor="let genre of genresList">
+    <a class="sidenav__list-item__link" [routerLink]="['/movies', genre.path]" routerLinkActive="sidenav__list-item__link--active">{{genre.name}}</a>
   </li>
 </ul>

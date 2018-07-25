@@ -8,8 +8,8 @@ import { MoviesUserComponent } from './movies-user/movies-user.component';
 const routes: Routes = [
   { path: '', redirectTo: 'movies/popular', pathMatch: 'full' },
   { path: 'movies', component: MoviesComponent },
-  { path: 'movies/:category', component: MoviesComponent },
-  { path: 'movies/:category/:movieTitle', component: MovieComponent },
+  { path: 'movies/:genre', component: MoviesComponent, data: { name } },
+  { path: 'movies/:genre/:movieTitle', component: MovieComponent },
   { path: 'my-lists/:list', component: MoviesUserComponent }
 ];
 

@@ -6,8 +6,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
-  @Input() category: string;
-  @Input() title: string;
+  @Input() genre: string;
+  @Input() movie: string;
   @Output() previousPage: EventEmitter<any> = new EventEmitter();
 
   constructor() { }

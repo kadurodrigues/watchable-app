@@ -2,100 +2,100 @@
   "popular": {
     "title": "Popular",
     "movies": [
-      { 
+      {
         "id": "01",
         "title": "Suicide Squad",
-        "year": "2016" 
+        "year": "2016"
       },
-      { 
+      {
         "id": "02",
         "title": "Jason Bourne",
-        "year": "2016" 
+        "year": "2016"
       },
-      { 
+      {
         "id": "03",
         "title": "Now You See Me 2",
-        "year": "2016" 
+        "year": "2016"
       },
-      { 
+      {
         "id": "04",
         "title": "The Boy Next Door",
-        "year": "2015" 
+        "year": "2015"
       },
-      { 
+      {
         "id": "05",
         "title": "The Jungle Book",
-        "year": "2016" 
+        "year": "2016"
       },
-      { 
+      {
         "id": "06",
         "title": "Mechanic: Resurrection",
-        "year": "2016" 
+        "year": "2016"
       },
-      { 
+      {
         "id": "07",
         "title": "Batman v Superman: Dawn of Justice",
-        "year": "2016" 
+        "year": "2016"
       },
-      { 
+      {
         "id": "08",
         "title": "Mad Max: Fury Road",
-        "year": "2015" 
+        "year": "2015"
       },
-      { 
+      {
         "id": "09",
         "title": "Captain America: Civil War",
-        "year": "2015" 
+        "year": "2015"
       },
-      { 
+      {
         "id": "10",
         "title": "Jurassic World",
-        "year": "2015" 
+        "year": "2015"
       },
-      { 
+      {
         "id": "11",
         "title": "The Hunger Games: Mockingjay - Part 1",
-        "year": "2014" 
+        "year": "2014"
       }
     ]
   },
-  "top-rated": {
+  "top_rated": {
     "title": "Top Rated",
     "movies": [
-      { 
+      {
         "id": "12",
         "title": "The Shawshank Redemption",
-        "year": "1994" 
+        "year": "1994"
       },
-      { 
+      {
         "id": "13",
         "title": "Whiplash",
-        "year": "2014" 
+        "year": "2014"
       },
-      { 
+      {
         "id": "14",
         "title": "The Godfather",
-        "year": "1972" 
+        "year": "1972"
       }
     ]
   },
   "upcoming": {
     "title": "Up Coming",
     "movies": [
-      { 
+      {
         "id": "15",
         "title": "The Light Between Oceans",
-        "year": "2018" 
+        "year": "2018"
       },
-      { 
+      {
         "id": "16",
         "title": "Keanu",
-        "year": "2018" 
+        "year": "2018"
       },
-      { 
+      {
         "id": "17",
         "title": "Juste la fin du monder",
-        "year": "2018" 
+        "year": "2018"
       }
     ]
   },
@@ -113,6 +113,84 @@
       "year": "2018",
       "vote_average": 6.59,
       "overview": "Katniss Everdeen reluctantly becomes the symbol of a mass rebellion against the autocratic Capitol."
+    }
+  ],
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 10770,
+      "name": "TV Movie"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    },
+    {
+      "id": 37,
+      "name": "Western"
     }
   ]
 }

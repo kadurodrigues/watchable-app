@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LIST_MOVIES_USER } from '../../assets/constants';
+import { USER_LIST_MOVIES } from '../../assets/constants';
 
 @Component({
   selector: 'wb-header',
@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, ) { }
 
   ngOnInit() {
-    this.lists = LIST_MOVIES_USER.map(list => list);
+    this.lists = USER_LIST_MOVIES.map(list => list);
   }
 
   public goToListPage(list: any) {

@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
-import { MoviesService } from '../movies/movies.service';
+import { MoviesService } from '../shared/sevices/movies.service';
 
 @Component({
   selector: 'wb-movie',
@@ -23,8 +23,8 @@ export class MovieComponent implements OnInit {
   public overview: string;
   public movieId: string;
 
-  public categoryBreadcrumb: string;
-  public titleBreadcrumb: string;
+  public breadcrumbGenre: string;
+  public breadcrumbMovie: string;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -39,8 +39,8 @@ export class MovieComponent implements OnInit {
       this.activateRoute.params,
       this.activateRoute.queryParams,
       (params: Params, qparams: Params) => ({ params, qparams })).subscribe(allParamns => {
-        this.categoryBreadcrumb = allParamns.params.category;
-        this.titleBreadcrumb = allParamns.params.movieTitle;
+        this.breadcrumbGenre = allParamns.params.genre;
+        this.breadcrumbMovie = allParamns.params.movieTitle;
         this.movieId = allParamns.qparams.id;
         this.getMovie(this.movieId);
       });
