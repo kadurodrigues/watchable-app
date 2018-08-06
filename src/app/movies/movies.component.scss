@@ -45,3 +45,70 @@
     color: rgba(255,255,255,.4);
   }
 }
+
+.list-load {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-top: 20px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 120px;
+  }
+  
+  &__item-cover {
+    height: 175px;
+    border-radius: 2px;
+    background-color: #404040;
+    @extend .animated-background;
+  }
+
+  &__item-line {
+    margin-top: 8px;
+    width: 80px;
+    height: 10px !important;
+    background-color: #404040; 
+    @extend .animated-background; 
+  }
+}
+
+.animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmerEffect;
+  animation-timing-function: linear;
+  background: #404040;
+  background: linear-gradient(to right, #404040 8%, #4b4b4b 18%, #404040 33%);
+  background-size: 800px 175px;
+  height: 175px;
+  position: relative;
+}
+
+@keyframes shimmerEffect {
+  0% {
+    background-position: -468px 0
+  }
+
+  100% {
+    background-position: 468px 0
+  }
+}
+
+// @keyframes pulse {
+//   0% {
+//     background-color: #404040;
+//   }
+
+//   50% {
+//     background-color: #505050
+//   }
+
+//   100% {
+//     background-color: #404040;
+//   }
+// }

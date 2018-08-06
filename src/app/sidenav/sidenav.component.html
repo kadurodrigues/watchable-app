@@ -6,6 +6,11 @@
 
 <ul class="sidenav__list" *ngIf="genresList?.length !== 0">
   <li class="sidenav__list-item" *ngFor="let genre of genresList">
-    <a class="sidenav__list-item__link" [routerLink]="['/movies', genre.path]" routerLinkActive="sidenav__list-item__link--active">{{genre.name}}</a>
+      <a class="sidenav__list-item__link" 
+      [routerLink]="['/movies', genre.path]"
+      routerLinkActive="sidenav__list-item__link--active"
+      (click)="navigateToGenreList(genre)">
+      {{genre.name}}
+    </a>
   </li>
 </ul>

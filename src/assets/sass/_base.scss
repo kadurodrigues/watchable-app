@@ -22,3 +22,8 @@ time, mark, audio, video {
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+.mat-progress-spinner circle, 
+.mat-spinner circle {
+  stroke: #fff !important;
+}

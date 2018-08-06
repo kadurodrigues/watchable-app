@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
+
 import { MoviesService } from '../shared/sevices/movies.service';
+import { MovieStore } from '../shared/stores/movie.store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { 
-  LOCAL_STORAGE_KEYS, 
   SIDENAV_HIGHLIGHTED_LISTS, 
   SIDENAV_GENRES_LIST 
 } from '../../assets/constants';
@@ -15,25 +18,26 @@ import {
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-  public movies: Array<any>;
-  public genreTitle: string;
-  public genrePath: string;
+  public movies$: Observable<any[]>;
+  public listTitle: string;
+  public listPath: string;
+  public genreId: number;
 
   public postPath = localStorage.getItem('posterBasePath');
+  public loadArray = new Array(10);
 
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private moviesService: MoviesService
+    private moviesService: MoviesService,
+    private movieStore: MovieStore
   ) { }
 
   ngOnInit() {
-    localStorage.setItem(LOCAL_STORAGE_KEYS.isLoggedIn, JSON.stringify(false));
-
     this.activateRoute.params.subscribe(params => {
-      this.genrePath = params.genre;
-      this.genreTitle = this.setListName(params.genre);
-      this.isGenreType(params.genre) ? this.getGenreMovies(params.genre) : this.getHighlightsListMovies(params.genre);
+      this.listPath = params.genre;
+      this.movieStore.getGenreId().subscribe(genreId => this.genreId = genreId);
+      this.genreId ? this.getGenreMovies(this.genreId) : this.getHighlightsListMovies(params.genre);
     });
   }
 
@@ -41,27 +45,18 @@ export class MoviesComponent implements OnInit {
     return [...SIDENAV_HIGHLIGHTED_LISTS, ...SIDENAV_GENRES_LIST].find(item => item.path === path).name;
   }
 
-  public isGenreType(genre: string) {
-    return [...SIDENAV_HIGHLIGHTED_LISTS, ...SIDENAV_GENRES_LIST]
-      .filter(item => item.path === genre)
-      .some(item => item.hasOwnProperty('id'))
-  }
-
-  public getGenreMovies(genre: string) {
-    const genreId = SIDENAV_GENRES_LIST.find(item => item.path === genre).id;
-    this.moviesService.getGenreMovies(genreId).subscribe(list => {
-      this.movies = list.results;
-    });
+  public getGenreMovies(genreId: number) {
+    this.movies$ = this.moviesService.getGenreMovies(genreId).pipe(map(res => res.results));
+    this.movieStore.setGenreId(null);
   }
 
   public getHighlightsListMovies(list: string) {
-    this.moviesService.getHighlightsListMovies(list).subscribe(list => {
-      this.movies = list.results;
-    });
+    this.movies$ = this.moviesService.getHighlightsListMovies(list).pipe(map(res => res.results));
   }
 
   public goToMoviePage(movie: any) {
-    this.router.navigate([`movies/${this.genrePath}/`, this.setStringPath(movie.title)], { queryParams: { id: movie.id } });
+    this.movieStore.setMovieId(movie.id);
+    this.router.navigate([`movies/${this.listPath}/`, this.setStringPath(movie.title)]);
   }
 
   public setStringPath(path: string) {

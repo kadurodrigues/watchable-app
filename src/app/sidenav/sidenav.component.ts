@@ -4,6 +4,8 @@ import { Sidenav } from './sidenav.model';
 import { Router } from '@angular/router';
 
 import { SidenavService } from './sidenav.service';
+import { MovieStore } from '../shared/stores/movie.store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'wb-sidenav',
@@ -16,6 +18,7 @@ export class SidenavComponent implements OnInit {
 
   constructor(
     private sidenavService: SidenavService,
+    private movieStore: MovieStore,
     private router: Router,
   ) { }
 
@@ -24,6 +27,10 @@ export class SidenavComponent implements OnInit {
     this.sidenavService.getGenresList().subscribe(genres => {
       this.genresList = genres.map(genre => this.setGenrePath(genre));
     });
+  }
+
+  public navigateToGenreList(genre: any) {
+    this.movieStore.setGenreId(genre.id);
   }
 
   public setGenrePath(genre: any) {

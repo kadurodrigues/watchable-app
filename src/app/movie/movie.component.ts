@@ -1,15 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
-import { combineLatest } from 'rxjs';
+// import { Location } from '@angular/common';
+// import { combineLatest } from 'rxjs';
 
-import { LOCAL_STORAGE_KEYS } from '../../assets/constants';
+import { 
+  LOCAL_STORAGE_KEYS, 
+  SIDENAV_HIGHLIGHTED_LISTS,
+  SIDENAV_GENRES_LIST, 
+} from '../../assets/constants';
 
 import { MatDialog } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { MoviesService } from '../shared/sevices/movies.service';
+import { MovieStore } from '../shared/stores/movie.store';
 
 @Component({
   selector: 'wb-movie',
@@ -17,41 +22,36 @@ import { MoviesService } from '../shared/sevices/movies.service';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit {
+  public genre: string;
   public title: string;
   public year: string;
   public rate: string;
   public overview: string;
   public movieId: string;
 
-  public breadcrumbGenre: string;
-  public breadcrumbMovie: string;
+  // public breadcrumbGenre: any;
+  // public breadcrumbMovie: string;
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private location: Location,
+    // private location: Location,
     private moviesService: MoviesService,
+    private movieStore: MovieStore,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
-    combineLatest(
-      this.activateRoute.params,
-      this.activateRoute.queryParams,
-      (params: Params, qparams: Params) => ({ params, qparams })).subscribe(allParamns => {
-        this.breadcrumbGenre = allParamns.params.genre;
-        this.breadcrumbMovie = allParamns.params.movieTitle;
-        this.movieId = allParamns.qparams.id;
-        this.getMovie(this.movieId);
-      });
+    this.activateRoute.params.subscribe(params => {
+      this.genre = params.genre;
+      this.movieStore.getMovieId().subscribe(movieId => this.getMovie(movieId));
+    })
   }
 
   public getMovie(id: string) {
     this.moviesService.getMovie(id).subscribe(movie => {
-      movie.map(resp => {
-        this.title = resp.title;
-        this.overview = resp.overview;
-      });
+      this.title = movie.original_title;
+      this.overview = movie.overview;
     });
   }
 
@@ -76,7 +76,7 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  public goBack(): void {
-    this.location.back();
-  }
+  // public goBack(): void {
+  //   this.location.back();
+  // }
 }

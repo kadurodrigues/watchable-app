@@ -9,13 +9,15 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
 import { DialogComponent } from './components/dialog/dialog.component';
 
 import { MoviesService } from './sevices/movies.service';
+import { MovieStore } from './stores/movie.store';
 
 @NgModule({
   imports: [
@@ -30,7 +32,8 @@ import { MoviesService } from './sevices/movies.service';
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   declarations: [DialogComponent],
   exports: [
@@ -42,7 +45,8 @@ import { MoviesService } from './sevices/movies.service';
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [DialogComponent]
 })
@@ -50,7 +54,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [MoviesService]
+      providers: [MoviesService, MovieStore]
     };
   }
 }

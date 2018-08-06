@@ -36,3 +36,6 @@ export const LOCAL_STORAGE_KEYS = {
   isLoggedIn: 'is-logged-in'
 };
 
+export const API_KEY = '648bf7f9b89c64a267d317265373a0c0';
+export const LANG = '&language=en-US';
+
