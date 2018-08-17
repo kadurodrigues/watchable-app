@@ -1,17 +1,27 @@
-<h2 mat-dialog-title>Login</h2>
+<!-- <h2 mat-dialog-title>Login</h2>
 <mat-dialog-content class="dialog-container">
   <p class="dialog-disclaimer">To add a movie you must have to login before</p>
-  <mat-form-field>
-    <input matInput placeholder="Email" [formControl]="email" required>
-    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Password" [formControl]="password" [type]="pswHide ? 'password' : 'text'" required>
-    <mat-icon matSuffix (click)="pswHide = !pswHide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-  </mat-form-field>
+  <form [formGroup]="loginForm">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Email" formControlName="email">
+      <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>  
+      <input matInput type="password" placeholder="Password" formControlName="password">
+      <mat-error *ngIf="password.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </form>
+  <div *ngIf="shouldShowAuthError" class="auth-error">
+    <p class="auth-error__message">{{ authErrorMessage }}</p>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button>Login</button>
-  <button mat-raised-button mat-dialog-close>Close</button>
-</mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="createUser()">
+    <span *ngIf="!shouldShowSpinner else spinner">Create User</span>
+    <ng-template #spinner>
+      <mat-spinner diameter="20" color="primary"></mat-spinner>
+    </ng-template>
+  </button>
+  <button mat-stroked-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions> -->
+<wb-user-lists></wb-user-lists>

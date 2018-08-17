@@ -1,0 +1,20 @@
+<form [formGroup]="signInForm" class="signIn">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Email" formControlName="email">
+    <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>  
+    <input matInput type="password" placeholder="Password" formControlName="password">
+    <mat-error *ngIf="password.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+</form>
+<div *ngIf="shouldShowAuthError" class="signIn-error">
+  <p class="signIn-error__message">{{ authErrorMessage }}</p>
+</div>
+<button mat-raised-button color="primary" (click)="signIn()">
+  <span *ngIf="!shouldShowSpinner else spinner">Sign in</span>
+  <ng-template #spinner>
+    <mat-spinner diameter="20" color="primary"></mat-spinner>
+  </ng-template>
+</button>
+<button mat-stroked-button color="primary" mat-dialog-close>Close</button>

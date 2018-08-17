@@ -1,15 +1,12 @@
-@import "../../../../assets/sass/_colors";
+@import "../../../assets/sass/_colors";
 
-.dialog-container {
+.signIn {
   display: flex;
   flex-direction: column;
 }
 
-.dialog-disclaimer {
+.signIn-error {
   margin-bottom: 15px;
-}
-
-.auth-error {
   padding: 10px;
   border-radius: 2px;
   background-color: $MAIN_COLOR;

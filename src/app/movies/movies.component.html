@@ -1,5 +1,5 @@
 <h2 class="genre-title">
-  {{ listTitle }}
+  {{ genre | titlecase }}
 </h2>
 <ul class="movies-list" *ngIf="(movies$ | async)?.length > 0 else spinner">
   <li class="movies-list__movie" *ngFor="let movie of movies$ | async">

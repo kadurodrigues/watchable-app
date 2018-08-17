@@ -10,11 +10,14 @@ import {
   MatInputModule,
   MatButtonModule,
   MatSnackBarModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatTabsModule,
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
-import { DialogComponent } from './components/dialog/dialog.component';
+
+import { AuthComponent } from '../auth/auth.component';
+import { UserListsComponent } from './components/user-lists/user-lists.component';
 
 import { MoviesService } from './sevices/movies.service';
 import { MovieStore } from './stores/movie.store';
@@ -33,10 +36,15 @@ import { MovieStore } from './stores/movie.store';
     MatButtonModule,
     MatSnackBarModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule
   ],
-  declarations: [DialogComponent],
+  declarations: [ 
+    UserListsComponent
+  ],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatDialogModule,
@@ -46,15 +54,19 @@ import { MovieStore } from './stores/movie.store';
     MatButtonModule,
     MatSnackBarModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule
   ],
-  entryComponents: [DialogComponent]
+  entryComponents: [UserListsComponent, AuthComponent]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [MoviesService, MovieStore]
+      providers: [ 
+        MoviesService, 
+        MovieStore
+      ]
     };
   }
 }

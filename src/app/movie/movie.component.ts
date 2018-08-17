@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-// import { Location } from '@angular/common';
-// import { combineLatest } from 'rxjs';
 
 import { 
   LOCAL_STORAGE_KEYS, 
@@ -13,6 +11,8 @@ import { MatDialog } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
+import { AuthComponent } from '../auth/auth.component';
+import { UserListsComponent } from '../shared/components/user-lists/user-lists.component';
 import { MoviesService } from '../shared/sevices/movies.service';
 import { MovieStore } from '../shared/stores/movie.store';
 
@@ -28,13 +28,10 @@ export class MovieComponent implements OnInit {
   public rate: string;
   public overview: string;
   public movieId: string;
-
-  // public breadcrumbGenre: any;
-  // public breadcrumbMovie: string;
+  public dialogRef: any;
 
   constructor(
     private activateRoute: ActivatedRoute,
-    // private location: Location,
     private moviesService: MoviesService,
     private movieStore: MovieStore,
     public dialog: MatDialog,
@@ -56,7 +53,7 @@ export class MovieComponent implements OnInit {
   }
 
   public addMovie() {
-    this.isUserLogged() ? this.addNewMovie() : this.openDialog();
+    this.isUserLogged() ? this.addNewMovie() : this.getCredencials();
   }
 
   public isUserLogged() {
@@ -70,13 +67,16 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  public openDialog() {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      height: '350px'
-    });
+  public getCredencials() {
+    this.dialog
+      .open(AuthComponent, {width: '369px', height: '350px'})
+      .afterClosed().subscribe((response) => {
+        response !== '' ? this.getUserLists() : null;
+      });
   }
 
-  // public goBack(): void {
-  //   this.location.back();
-  // }
+  public getUserLists(){
+    this.dialog
+      .open(UserListsComponent, { height: '350px'})
+  }
 }

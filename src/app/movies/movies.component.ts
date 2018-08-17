@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { MoviesService } from '../shared/sevices/movies.service';
 import { MovieStore } from '../shared/stores/movie.store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { 
   SIDENAV_HIGHLIGHTED_LISTS, 
@@ -19,8 +20,7 @@ import {
 })
 export class MoviesComponent implements OnInit {
   public movies$: Observable<any[]>;
-  public listTitle: string;
-  public listPath: string;
+  public genre: string;
   public genreId: number;
 
   public postPath = localStorage.getItem('posterBasePath');
@@ -30,36 +30,47 @@ export class MoviesComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router,
     private moviesService: MoviesService,
-    private movieStore: MovieStore
+    private movieStore: MovieStore,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.activateRoute.params.subscribe(params => {
-      this.listPath = params.genre;
+      this.genre = params.genre;
       this.movieStore.getGenreId().subscribe(genreId => this.genreId = genreId);
       this.genreId ? this.getGenreMovies(this.genreId) : this.getHighlightsListMovies(params.genre);
     });
   }
 
-  public setListName(path: string) {
-    return [...SIDENAV_HIGHLIGHTED_LISTS, ...SIDENAV_GENRES_LIST].find(item => item.path === path).name;
-  }
-
   public getGenreMovies(genreId: number) {
-    this.movies$ = this.moviesService.getGenreMovies(genreId).pipe(map(res => res.results));
+    this.movies$ = this.moviesService.getGenreMovies(genreId).pipe(
+      map(res => res.results),
+      catchError(this.handleError.bind(this))
+    );
+
     this.movieStore.setGenreId(null);
   }
 
   public getHighlightsListMovies(list: string) {
-    this.movies$ = this.moviesService.getHighlightsListMovies(list).pipe(map(res => res.results));
+    this.movies$ = this.moviesService.getHighlightsListMovies(list).pipe(
+      map(res => res.results),
+      catchError(this.handleError.bind(this))
+    );
   }
 
   public goToMoviePage(movie: any) {
     this.movieStore.setMovieId(movie.id);
-    this.router.navigate([`movies/${this.listPath}/`, this.setStringPath(movie.title)]);
+    this.router.navigate([`movies/${this.genre}/`, this.setStringPath(movie.title)]);
   }
 
   public setStringPath(path: string) {
-    return path.replace(/[: ]+/g, '-').toLowerCase();
+    return path.replace(/[: ]+/g, '-').toLowerCase(); 
+  }
+
+  public handleError(error) {
+    this.snackBar.open(error.error.status_message, 'OK', {
+      verticalPosition: 'top',
+      duration: 3000
+    });
   }
 }

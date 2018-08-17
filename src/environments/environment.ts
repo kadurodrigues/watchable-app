@@ -6,6 +6,14 @@ export const environment = {
   production: false,
   API_URL: 'http://localhost:3000',
   apiUrl: 'https://api.themoviedb.org/3',
+  firebase: {
+    apiKey: "AIzaSyAOkaXbStWQQ2EoZY_3qyXpN7z1uIrKnu4",
+    authDomain: "watchableapp.firebaseapp.com",
+    databaseURL: "https://watchableapp.firebaseio.com",
+    projectId: "watchableapp",
+    storageBucket: "watchableapp.appspot.com",
+    messagingSenderId: "470975738466"
+  }
 };
 
 /*

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'wb-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  selector: 'wb-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss']
 })
-export class DialogComponent implements OnInit {
-  public loginForm: FormGroup;
+export class SignInComponent implements OnInit {
+  public signInForm: FormGroup;
   public email: FormControl;
   public password: FormControl;
 
@@ -18,34 +19,37 @@ export class DialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<DialogComponent>,
+    private authService: AuthService,
+    public dialogRef: MatDialogRef<SignInComponent>
   ) { }
 
   ngOnInit() {
     this.email = this.formBuilder.control(null, [Validators.required, Validators.email]);
     this.password = this.formBuilder.control(null, Validators.required);
 
-    this.loginForm = this.formBuilder.group({
+    this.signInForm = this.formBuilder.group({
       email: this.email,
       password: this.password
     })
   }
 
-  // public createUser() {
-  //   this.shouldShowSpinner = true;
-  //   const { email, password } = this.loginForm.value;
+  public signIn() {
+    this.shouldShowSpinner = true;
+    this.shouldShowAuthError = false;
 
-  //   this.auth.createUser(email, password)
-  //     .then(user => this.onCreateUserSuccessfull(user))
-  //     .catch(error => this.onCreateUserError(error) );
-  // }
+    const { email, password } = this.signInForm.value;
 
-  public onCreateUserSuccessfull(user: any) {
-    this.shouldShowSpinner = false;
-    this.dialogRef.close();
+    this.authService.getSignIn(email, password)
+      .then(user => this.onSignInSuccessfull(user))
+      .catch(error => this.onSignInFailed(error) );
   }
 
-  public onCreateUserError(error) {
+  public onSignInSuccessfull(user: any) {
+    this.shouldShowSpinner = false;
+    this.dialogRef.close(user);
+  }
+
+  public onSignInFailed(error) {
     this.shouldShowSpinner = false;
     this.shouldShowAuthError = true;
     this.authErrorMessage = error.message;
@@ -56,5 +60,4 @@ export class DialogComponent implements OnInit {
       : this.email.hasError('email') ? 'Not a valid email' 
       : '';
   }
-
 }
