@@ -15,4 +15,11 @@
 <div *ngIf="shouldShowAuthError" class="auth-error">
   <p class="auth-error__message">{{ authErrorMessage }}</p>
 </div>
+<button mat-raised-button color="primary" (click)="signUp()">
+  <span *ngIf="!shouldShowSpinner else spinner">Sign Up</span>
+  <ng-template #spinner>
+    <mat-spinner diameter="20" color="primary"></mat-spinner>
+  </ng-template>
+</button>
+<button mat-stroked-button color="primary" mat-dialog-close>Close</button>
   

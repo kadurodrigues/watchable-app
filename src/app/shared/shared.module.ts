@@ -19,7 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthComponent } from '../auth/auth.component';
 import { UserListsComponent } from './components/user-lists/user-lists.component';
 
-import { MoviesService } from './sevices/movies.service';
+import { MoviesService } from './services/movies.service';
+import { UsersService } from './services/users.service';
 import { MovieStore } from './stores/movie.store';
 
 @NgModule({
@@ -64,7 +65,8 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [ 
-        MoviesService, 
+        MoviesService,
+        UsersService, 
         MovieStore
       ]
     };
