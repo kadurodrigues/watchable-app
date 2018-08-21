@@ -1,20 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { 
-  LOCAL_STORAGE_KEYS, 
+import {
+  LOCAL_STORAGE_KEYS,
   SIDENAV_HIGHLIGHTED_LISTS,
-  SIDENAV_GENRES_LIST, 
+  SIDENAV_GENRES_LIST
 } from '../../assets/constants';
 
 import { MatDialog } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
-import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { AuthComponent } from '../auth/auth.component';
 import { UserListsComponent } from '../shared/components/user-lists/user-lists.component';
-import { MoviesService } from '../shared/sevices/movies.service';
+import { MoviesService } from '../shared/services/movies.service';
+import { UsersService } from '../shared/services/users.service';
 import { MovieStore } from '../shared/stores/movie.store';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'wb-movie',
@@ -33,16 +34,17 @@ export class MovieComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private moviesService: MoviesService,
+    private usersServices: UsersService,
     private movieStore: MovieStore,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.activateRoute.params.subscribe(params => {
       this.genre = params.genre;
       this.movieStore.getMovieId().subscribe(movieId => this.getMovie(movieId));
-    })
+    });
   }
 
   public getMovie(id: string) {
@@ -63,20 +65,26 @@ export class MovieComponent implements OnInit {
   public addNewMovie() {
     this.snackBar.open(`The Movie ${this.movieId} has been added`, 'OK', {
       verticalPosition: 'top',
-      duration: 2000,
+      duration: 2000
     });
   }
 
   public getCredencials() {
     this.dialog
-      .open(AuthComponent, {width: '369px', height: '350px'})
-      .afterClosed().subscribe((response) => {
-        response !== '' ? this.getUserLists() : null;
+      .open(AuthComponent, { width: '369px', height: '350px' })
+      .afterClosed()
+      .subscribe(userUID => {
+        if (userUID !== '') {
+          this.getUserLists(userUID);
+        }
       });
   }
 
-  public getUserLists(){
-    this.dialog
-      .open(UserListsComponent, { height: '350px'})
+  public getUserLists(userUID: string) {
+
+    this.usersServices.getUsers(userUID)
+      .then(response => console.log(response.data()));
+
+    this.dialog.open(UserListsComponent, { height: '350px' });
   }
 }

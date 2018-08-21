@@ -3,10 +3,12 @@
 </h2>
 <ul class="movies-list" *ngIf="(movies$ | async)?.length > 0 else spinner">
   <li class="movies-list__movie" *ngFor="let movie of movies$ | async">
-    <div 
+    <!-- <div 
       class="movies-list__movie-cover"
       [style.backgroundImage]="'url('+ postPath + movie.poster_path +')'"
       (click)="goToMoviePage(movie)">
+    </div> -->
+    <div class="movies-list__movie-cover" (click)="goToMoviePage(movie)">
     </div>
     <h3 class="movies-list__movie-title">{{ movie.title }}</h3>
     <p class="movies-list__movie-year">{{ movie.year }}</p>

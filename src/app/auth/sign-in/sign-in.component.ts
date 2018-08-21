@@ -30,7 +30,7 @@ export class SignInComponent implements OnInit {
     this.signInForm = this.formBuilder.group({
       email: this.email,
       password: this.password
-    })
+    });
   }
 
   public signIn() {
@@ -44,9 +44,10 @@ export class SignInComponent implements OnInit {
       .catch(error => this.onSignInFailed(error) );
   }
 
-  public onSignInSuccessfull(user: any) {
+  public onSignInSuccessfull(result: any) {
+    const { uid } = result.user;
     this.shouldShowSpinner = false;
-    this.dialogRef.close(user);
+    this.dialogRef.close(uid);
   }
 
   public onSignInFailed(error) {
@@ -56,8 +57,8 @@ export class SignInComponent implements OnInit {
   }
 
   public getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' 
-      : this.email.hasError('email') ? 'Not a valid email' 
+    return this.email.hasError('required') ? 'You must enter a value'
+      : this.email.hasError('email') ? 'Not a valid email'
       : '';
   }
 }
