@@ -1,4 +1,4 @@
 export interface Movie {
   title: string;
-  year: string  
+  year: string;
 }

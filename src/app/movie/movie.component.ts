@@ -75,16 +75,33 @@ export class MovieComponent implements OnInit {
       .afterClosed()
       .subscribe(userUID => {
         if (userUID !== '') {
-          this.getUserLists(userUID);
+          this.getUser(userUID);
         }
       });
   }
 
-  public getUserLists(userUID: string) {
+  public getUser(userUID: string) {
+    this.usersServices.getUser(userUID)
+      .then(response => this.onGetUserSuccessfull(response.data()))
+      .catch(error => this.onGetUserFailed(error));
+  }
 
-    this.usersServices.getUsers(userUID)
-      .then(response => console.log(response.data()));
+  public onGetUserSuccessfull(user) {
+    this.dialog.open(UserListsComponent, {
+      data: user,
+      width: '350px',
+      height: '350px'
+    });
+  }
 
-    this.dialog.open(UserListsComponent, { height: '350px' });
+  public onGetUserFailed(error) {
+    this.snackBar.open(error.message, 'OK', {
+      verticalPosition: 'top',
+      duration: 2000
+    });
+  }
+
+  public getUserLists(user) {
+    return user.lists;
   }
 }

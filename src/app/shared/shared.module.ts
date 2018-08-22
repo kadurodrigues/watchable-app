@@ -40,7 +40,7 @@ import { MovieStore } from './stores/movie.store';
     MatProgressSpinnerModule,
     MatTabsModule
   ],
-  declarations: [ 
+  declarations: [
     UserListsComponent
   ],
   exports: [
@@ -64,9 +64,9 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [ 
+      providers: [
         MoviesService,
-        UsersService, 
+        UsersService,
         MovieStore
       ]
     };

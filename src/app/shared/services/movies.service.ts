@@ -18,7 +18,7 @@ export class MoviesService {
   public getHighlightsListMovies(list: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/movie/${list}?api_key=${API_KEY}${LANG}&page=1`);
   }
-  
+
   public getGenreMovies(genreId: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/genre/${genreId}/movies?api_key=${API_KEY}${LANG}&page=1`)
   }

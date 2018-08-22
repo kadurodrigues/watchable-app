@@ -1,6 +1,15 @@
-<ul>
-  <li>List 1</li>
-  <li>List 2</li>
-  <li>List 3</li>
-  <li>List 4</li>
+<ul *ngIf="userLists?.length > 0; else noLists">
+  <li *ngFor="let lists of userLists"></li>
 </ul>
+
+<ng-template #noLists>
+  <p>There is not list created yet!</p>
+  <form [formGroup]="listNameForm" class="new-list-form">
+    <mat-form-field>
+      <input matInput type="text" placeholder="New list" formControlName="listName">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="createList()">
+      Create List
+    </button>
+  </form>
+</ng-template>
